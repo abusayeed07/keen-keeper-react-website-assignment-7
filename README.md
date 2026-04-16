@@ -8,7 +8,7 @@ Stop forgetting important conversations and start building stronger connections.
 
 ## 🚀 Live Demo
 
-[View Live Demo](keen-keeper-react-webpage.vercel.app)
+[View Live Demo](https://keen-keeper-react-webpage.vercel.app/)
 
 ## 🛠️ Technologies Used
 
