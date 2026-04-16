@@ -1,10 +1,12 @@
 // src/pages/Timeline.jsx
 import { useState } from 'react';
 import { useFriends } from '../context/FriendsContext';
-import { PhoneIcon, ChatBubbleLeftIcon, VideoCameraIcon, FunnelIcon } from '@heroicons/react/24/outline';
+import { PhoneIcon, ChatBubbleLeftIcon, VideoCameraIcon, FunnelIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Timeline = () => {
-  const { timelineEntries } = useFriends();
+  const { timelineEntries, removeAllTimelineEntries } = useFriends();
   const [filter, setFilter] = useState('all');
 
   const filteredEntries = timelineEntries.filter(entry => 
@@ -20,23 +22,90 @@ const Timeline = () => {
     }
   };
 
+  const handleRemoveAll = () => {
+    if (timelineEntries.length === 0) {
+      toast.info('No entries to remove!', {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      return;
+    }
+    
+    toast(({ closeToast }) => (
+      <div className="flex flex-col gap-2">
+        <p>⚠️ Remove ALL {timelineEntries.length} timeline entries?</p>
+        <p className="text-sm text-gray-500">This action cannot be undone!</p>
+        <div className="flex gap-2 justify-end">
+          <button
+            onClick={() => {
+              removeAllTimelineEntries();
+              closeToast();
+            }}
+            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+          >
+            Yes, Remove All
+          </button>
+          <button
+            onClick={closeToast}
+            className="px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 text-sm"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    ), {
+      position: "top-center",
+      autoClose: false,
+      closeOnClick: false,
+      draggable: false,
+      closeButton: false
+    });
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Timeline</h1>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <h1 className="text-3xl font-bold text-gray-800">Timeline</h1>
         
-        <div className="flex items-center space-x-2">
-          <FunnelIcon className="w-5 h-5 text-gray-500" />
-          <select 
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="all">All Interactions</option>
-            <option value="call">Calls Only</option>
-            <option value="text">Texts Only</option>
-            <option value="video">Videos Only</option>
-          </select>
+        <div className="flex items-center gap-3">
+          {/* Filter Dropdown */}
+          <div className="flex items-center space-x-2">
+            <FunnelIcon className="w-5 h-5 text-gray-500" />
+            <select 
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Interactions</option>
+              <option value="call">Calls Only</option>
+              <option value="text">Texts Only</option>
+              <option value="video">Videos Only</option>
+            </select>
+          </div>
+
+          {/* Remove All Button */}
+          {timelineEntries.length > 0 && (
+            <button
+              onClick={handleRemoveAll}
+              className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+            >
+              <TrashIcon className="w-5 h-5" />
+              <span>Remove All ({timelineEntries.length})</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -47,7 +116,7 @@ const Timeline = () => {
       ) : (
         <div className="space-y-4">
           {filteredEntries.map((entry) => (
-            <div key={entry.id} className="bg-white rounded-xl shadow-md p-4 flex items-center space-x-4 hover:shadow-lg transition-shadow">
+            <div key={entry.id} className="bg-white rounded-xl shadow-md p-4 flex items-center space-x-4 hover:shadow-lg transition-shadow group">
               <div className="bg-gray-100 p-3 rounded-full">
                 {getIcon(entry.type)}
               </div>

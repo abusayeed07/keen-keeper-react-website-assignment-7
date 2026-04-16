@@ -7,7 +7,7 @@ const Footer = () => {
       {/* Logo & Description */}
       <div className="text-center space-y-3.5 mb-12">
         <h2 className="text-6xl font-bold text-white">KeenKeeper</h2>
-        <p className="text-sm text-gray-300 max-w-2xl mx-auto px-4">
+        <p className="text-sm text-gray-300  mx-auto px-4">
           Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.
         </p>
       </div>

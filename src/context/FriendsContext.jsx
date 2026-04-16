@@ -42,10 +42,24 @@ export const FriendsProvider = ({ children }) => {
     toast.success(`Added: ${newEntry.title}`);
   };
 
+  // Remove all timeline entries
+  const removeAllTimelineEntries = () => {
+    setTimelineEntries([]);
+    localStorage.removeItem('friendship_timeline');
+    toast.success('🗑️ All timeline entries cleared!');
+  };
+
   const getFriendById = (id) => friends.find(f => f.id === parseInt(id));
 
   return (
-    <FriendsContext.Provider value={{ friends, loading, timelineEntries, addTimelineEntry, getFriendById }}>
+    <FriendsContext.Provider value={{ 
+      friends, 
+      loading, 
+      timelineEntries, 
+      addTimelineEntry, 
+      removeAllTimelineEntries,  // ← Added this
+      getFriendById 
+    }}>
       {children}
     </FriendsContext.Provider>
   );
