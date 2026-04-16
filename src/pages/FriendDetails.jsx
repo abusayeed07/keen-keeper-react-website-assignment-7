@@ -43,7 +43,7 @@ const FriendDetails = () => {
             <h3 className="text-sm font-semibold text-gray-500 mb-2">Tags</h3>
             <div className="flex flex-wrap gap-2">
               {friend.tags.map((tag, idx) => (
-                <span key={idx} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">{tag}</span>
+                <span key={idx} className="bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full text-sm">{tag}</span>
               ))}
             </div>
           </div>
@@ -59,15 +59,15 @@ const FriendDetails = () => {
           </div>
           
           <div className="flex flex-wrap gap-3 pt-4 border-t">
-            <button className="flex items-center space-x-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors">
+            <button className="btn flex items-center space-x-1 text-gray-700 px-4 py-2 rounded-lg transition-colors">
               <ClockIcon className="w-4 h-4" />
               <span>Snooze 2 Weeks</span>
             </button>
-            <button className="flex items-center space-x-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors">
+            <button className="btn flex items-center space-x-1  text-gray-700 px-4 py-2 rounded-lg transition-colors">
               <ArchiveBoxIcon className="w-4 h-4" />
               <span>Archive</span>
             </button>
-            <button className="flex items-center space-x-1 bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition-colors">
+            <button className="btn btn-error flex items-center space-x-1  px-4 py-2 rounded-lg transition-colors">
               <TrashIcon className="w-4 h-4" />
               <span>Delete</span>
             </button>
@@ -79,28 +79,28 @@ const FriendDetails = () => {
           {/* Stats Cards */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-white rounded-xl shadow-md p-4 text-center">
-              <p className="text-gray-500 text-sm">Days Since Contact</p>
               <p className="text-2xl font-bold text-gray-800">{friend.days_since_contact}</p>
+              <p className="text-gray-500 text-sm">Days Since Contact</p>
             </div>
             <div className="bg-white rounded-xl shadow-md p-4 text-center">
-              <p className="text-gray-500 text-sm">Goal (days)</p>
               <p className="text-2xl font-bold text-gray-800">{friend.goal}</p>
+              <p className="text-gray-500 text-sm">Goal (days)</p>
             </div>
             <div className="bg-white rounded-xl shadow-md p-4 text-center">
-              <p className="text-gray-500 text-sm">Next Due Date</p>
               <p className="text-sm font-semibold text-gray-800">{friend.next_due_date}</p>
+              <p className="text-gray-500 text-sm">Next Due Date</p>
             </div>
           </div>
 
           {/* Relationship Goal Card */}
           <div className="bg-white rounded-xl shadow-md p-6">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-gray-800">Relationship Goal</h3>
+              <h3 className="font-semibold text-[#244D3F]">Relationship Goal</h3>
               <button className="text-blue-600 hover:text-blue-700">
                 <PencilIcon className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-gray-600">Contact every <span className="font-bold">{friend.goal}</span> days</p>
+            <p className="text-gray-600">Connect every <span className="font-bold">{friend.goal}</span> days</p>
             <div className="mt-3 bg-gray-200 rounded-full h-2">
               <div 
                 className="bg-blue-600 rounded-full h-2" 
@@ -115,21 +115,21 @@ const FriendDetails = () => {
             <div className="flex flex-wrap gap-3">
               <button 
                 onClick={() => handleInteraction('call')}
-                className="flex items-center space-x-2 bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition-colors"
+                className="btn flex items-center space-x-2 bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg transition-colors"
               >
                 <PhoneIcon className="w-5 h-5" />
                 <span>Call</span>
               </button>
               <button 
                 onClick={() => handleInteraction('text')}
-                className="flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition-colors"
+                className="btn flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-lg transition-colors"
               >
                 <ChatBubbleLeftIcon className="w-5 h-5" />
                 <span>Text</span>
               </button>
               <button 
                 onClick={() => handleInteraction('video')}
-                className="flex items-center space-x-2 bg-purple-100 hover:bg-purple-200 text-purple-700 px-4 py-2 rounded-lg transition-colors"
+                className="btn flex items-center space-x-2 bg-purple-100 hover:bg-purple-200 text-purple-700 px-4 py-2 rounded-lg transition-colors"
               >
                 <VideoCameraIcon className="w-5 h-5" />
                 <span>Video</span>
