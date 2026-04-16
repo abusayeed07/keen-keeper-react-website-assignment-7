@@ -13,10 +13,8 @@ export const FriendsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading delay
     setTimeout(() => {
       setFriends(friendsData);
-      // Load timeline from localStorage
       const savedTimeline = localStorage.getItem('friendship_timeline');
       if (savedTimeline) {
         setTimelineEntries(JSON.parse(savedTimeline));
@@ -30,7 +28,7 @@ export const FriendsProvider = ({ children }) => {
       id: Date.now(),
       friendId,
       friendName,
-      type, // 'call', 'text', 'video'
+      type,
       title: `${type === 'call' ? 'Call' : type === 'text' ? 'Text' : 'Video'} with ${friendName}`,
       date: new Date().toISOString(),
     };
@@ -46,7 +44,7 @@ export const FriendsProvider = ({ children }) => {
   const removeAllTimelineEntries = () => {
     setTimelineEntries([]);
     localStorage.removeItem('friendship_timeline');
-    toast.success('🗑️ All timeline entries cleared!');
+    toast.success(`🗑️ Removed all ${timelineEntries.length} timeline entries!`);
   };
 
   const getFriendById = (id) => friends.find(f => f.id === parseInt(id));
@@ -57,7 +55,7 @@ export const FriendsProvider = ({ children }) => {
       loading, 
       timelineEntries, 
       addTimelineEntry, 
-      removeAllTimelineEntries,  // ← Added this
+      removeAllTimelineEntries,
       getFriendById 
     }}>
       {children}

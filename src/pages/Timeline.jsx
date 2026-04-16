@@ -30,36 +30,7 @@ const Timeline = () => {
       });
       return;
     }
-    
-    toast(({ closeToast }) => (
-      <div className="flex flex-col gap-2">
-        <p>⚠️ Remove ALL {timelineEntries.length} timeline entries?</p>
-        <p className="text-sm text-gray-500">This action cannot be undone!</p>
-        <div className="flex gap-2 justify-end">
-          <button
-            onClick={() => {
-              removeAllTimelineEntries();
-              closeToast();
-            }}
-            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
-          >
-            Yes, Remove All
-          </button>
-          <button
-            onClick={closeToast}
-            className="px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 text-sm"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    ), {
-      position: "top-center",
-      autoClose: false,
-      closeOnClick: false,
-      draggable: false,
-      closeButton: false
-    });
+    removeAllTimelineEntries();
   };
 
   return (
@@ -100,7 +71,7 @@ const Timeline = () => {
           {timelineEntries.length > 0 && (
             <button
               onClick={handleRemoveAll}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+              className="btn btn-error flex items-center gap-2 px-4 py-2  text-white rounded-lg transition-colors"
             >
               <TrashIcon className="w-5 h-5" />
               <span>Remove All ({timelineEntries.length})</span>
